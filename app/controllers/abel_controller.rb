@@ -1,0 +1,2 @@
+class AbelController < ApplicationController
+end
