@@ -1,6 +1,13 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
+  has_many :wanteds, dependent: :destroy
+  
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
+  validates :sno,  presence: true, length: { maximum: 50 }
+  validates :college,  presence: true, length: { maximum: 50 }
+  validates :year,  presence: true, length: { maximum: 50 }
+  validates :course,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -15,4 +22,15 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def feed
+    Micropost.where("user_id = ?", id)
+
+  end
+
+  def wfeed
+    Wanted.where("user_id = ?", id)
+  end
+
+
 end

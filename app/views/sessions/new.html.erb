@@ -1,19 +1,122 @@
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
+<div class='home'>
+<body id="page">
+        <!-- start of sign sheet modal -->
+        <div class="ui small modal">
+            <i class="close icon"></i>
+            <form class="ui mini form">
+                <div class="ui raised segment">
+                    <p id="login_text" style="font-weight:bolder;">
+                        Join UP Freelancer today!
+                    </p>
+                    <div class="two fields">
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="firstname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="lastname" placeholder="Lastname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                    <div class="field">
+                        <div class="ui input">
+                            <input type="text" name="studentnumber" placeholder="SN<20xx-xxxxx>">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui input">
+                            <input type="text" name="college" placeholder="College">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="year" placeholder="Year">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="course" placeholder="Course">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="email" placeholder="E-mail address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input" >
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="Password" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui fluid large submit button" style="background-color:#421b05;color:white;">Sign Up</div>
+                </div>
+            </form>
+        </div>
+        <!-- end of signup sheet modal -->
+        <!-- start of login page -->
+        <div id="overall_container">
+            <div class="ui middle aligned center aligned grid" >
+                <div class="column">
+                    <img class="ui small circular middle aligned centered raised image" src="<%= image_url('favicon.jpeg') %>" id="logo">
+                    <!-- <form class="ui mini form"> -->
+                    <%= form_for(:session, url: login_path,html: {class: "ui mini form"}) do |f| %>
+                        <div class="ui raised segment">
+                            <p id="login_text" style="color:#421b05;font-weight:600;">
+                                Log-in to your account
+                            </p>
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                     <%= f.email_field :email, class: 'form-control',placeholder:"E-mail Address" %>
+                                    <!-- <input type="text" name="email" placeholder="E-mail address"> -->
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <%= f.password_field :password, class: 'form-control',placeholder:"Password" %>
+                                    <!-- <input type="password" name="password" placeholder="Password"> -->
+                                </div>
+                            </div>
+                            <%= f.submit"Log-in" ,class: "ui fluid large submit button" %>
+                            <!-- <div class="ui animated fade fluid large submit button" tabindex="0" style="background-color:#421b05;color:white;"> -->
+                                <!-- <div class="visible content">Login</div>
+                                <div class="hidden content">
+                                    <i class="right arrow icon"></i>
+                                </div> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="ui error message"></div>
+                    <!-- </form> -->
+                    <% end %>
+                    <div class="ui raised segment">
+                        Be a part of our community!
+                        <button class="link" id="modal_button">Sign Up Today!</a>
+                    </div>
+                </div>
+            </div>
+          <!-- end of login page -->
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
+        </div>
+        <!-- start script code for modal button -->
+        <script type="text/javascript">
+            $('#modal_button').on('click', function(){
+            $('.ui.small.modal').modal('show');
+            });
+        </script>
+        <!-- end of script code for modal button -->
+        <!-- link to semantic ui -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script>
+        <!-- end -->
+</body>
 </div>

@@ -1,2 +1,0 @@
-class AbelController < ApplicationController
-end

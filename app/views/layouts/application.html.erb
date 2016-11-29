@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= render 'layouts/rails_default' %>
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-      </script>
-    <![endif]-->
-  </head>
-  <body>
-    <%= render 'layouts/header' %>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
-    </div>
+    <head>
+        <title>freelancer</title>
+        <%= favicon_link_tag 'favicon.ico' %>
+        <%= stylesheet_link_tag "application.css"%>
+        <%= render 'layouts/rails_default' %>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
+    </head>
+    <body>
+        <% if logged_in? %>
+            <%= render 'layouts/header' %>
+        <% end %>
+        <div id="header_padding"></div>
+        <div class="container">
+        <% if logged_in? %>
+            <% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>" id="prompt"><%= message %></div>
+            <% end %>
+        <% end %>
+        <%= yield %>
+        <% if logged_in? %>
+        <% else %>
+        <div class="ui middle aligned center aligned grid" >
+            <div class="column" style="min-width: 400px;
+            max-width: 400px;">
+            <% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>" id="prompt"><%= message %></div>
+            <% end %>
+        </div></div>
+        <% end %>
+        <%= render 'layouts/footer' %>
+        <!-- <%= debug(params) if Rails.env.development? %> -->
+        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script>
   </body>
 </html>
